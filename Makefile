@@ -12,6 +12,7 @@ LIBS =
 
 ifeq ($(OS),Windows_NT)
 	CFLAGS += -DWINDOWS
+	LDFLAGS += -static -lstdc++
 endif
 
 .PHONY: all clean
