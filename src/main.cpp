@@ -83,7 +83,13 @@ int main(int argc, char** argv) {
     }
     printf("Starting render...\n");
     std::vector<FloatingImage> images = {};
-    FILE* ffmpeg = popen(("ffmpeg -hide_banner -loglevel error -y -r 15 -f rawvideo -pix_fmt rgba -s " + std::to_string(upscaled->width()) + "x" + std::to_string(upscaled->height()) + " -i - -vf \"scale=ceil((iw/ih*240)/2)*2:240\" -c:v h264 -pix_fmt yuv420p -b:v 96k video.mp4").c_str(), "w");
+    FILE* ffmpeg = popen(("ffmpeg -hide_banner -loglevel error -y -r 15 -f rawvideo -pix_fmt rgba -s " + std::to_string(upscaled->width()) + "x" + std::to_string(upscaled->height()) + " -i - -vf \"scale=ceil((iw/ih*240)/2)*2:240\" -c:v h264 -pix_fmt yuv420p -b:v 96k video.mp4").c_str(),
+#ifdef WINDOWS
+        "wb"
+#else
+        "w"
+#endif
+    );
     for (int i = 0; i < 30; i++) {
         printf("\e[GRendering...%2d/90", i + 1);
         fflush(stdout);
