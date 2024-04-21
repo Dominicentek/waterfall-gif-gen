@@ -98,6 +98,8 @@ void calculate_scaled_width_and_height(int basew, int baseh, int* w, int* h) {
         *w = settings.max_width;
         *h = settings.max_height * ((float)baseh / basew);
     }
+    *w = floor(*w / 2.f) * 2.f;
+    *h = floor(*h / 2.f) * 2.f;
 }
 
 bool print_help(struct OptIter* iter = nullptr) {
@@ -251,7 +253,7 @@ int main(int argc, char** argv) {
     system("ffmpeg -hide_banner -loglevel error -y -i video.mp4 -i palette.png -filter_complex \"paletteuse\" output.gif");
     printf("Cleaning up...\n");
     fflush(stdout);
-    //std::filesystem::remove("video.mp4");
+    std::filesystem::remove("video.mp4");
     std::filesystem::remove("palette.png");
     delete base;
     delete scaled;
