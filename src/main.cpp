@@ -96,7 +96,7 @@ void calculate_scaled_width_and_height(int basew, int baseh, int* w, int* h) {
     *h = settings.max_height;
     if (*w > settings.max_width) {
         *w = settings.max_width;
-        *h = settings.max_height * ((float)baseh / basew);
+        *h = settings.max_width * ((float)baseh / basew);
     }
     *w = floor(*w / 2.f) * 2.f;
     *h = floor(*h / 2.f) * 2.f;
@@ -199,7 +199,7 @@ int main(int argc, char** argv) {
         Image* frame = new Image(scaled->width(), scaled->height());
         frame->setdata(scaled->pixels());
         int generate_imgs = get_rand_int(settings.min_img_per_frame, settings.max_img_per_frame);
-        for (int i = 0; i < generate_imgs && i < settings.img_gen_frames; i++) {
+        for (int j = 0; j < generate_imgs && i < settings.img_gen_frames; j++) {
             FloatingImage img;
             img.posX = get_rand(settings.min_spawn_x, settings.max_spawn_x);
             img.posY = get_rand(settings.min_spawn_y, settings.max_spawn_y);
